@@ -60,7 +60,7 @@ def construct_message(entities):
     template = Template(config["template"])
     uuid1 = uuid.uuid4().hex
     now = datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
-    string_output = template.render(uuid=uuid1, now=now, entities=entities)
+    string_output = template.render(uuid=uuid1, now=now)
     dict_output = json.loads(string_output)
 
     payload_key = config["batch_payload_key"]
