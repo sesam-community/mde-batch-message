@@ -8,6 +8,8 @@ Batch size is determined by defined batch size in Sesam pipe feeding the microse
 ### Config example
 *Notice that the `template` property is an escaped json string.*
 
+`batch_payload_key` is the key for the value that should be replaced with the list of entities posted to the service.
+
 ```json
 {
   "_id": "mde-batch",
