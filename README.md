@@ -22,7 +22,7 @@ Batch size is determined by defined batch size in Sesam pipe feeding the microse
     },
     "image": "andebor/mde-batch-message:latest",
     "memory": 512,
-    "port": 5000
+    "port": 5001
   },
   "type": "system:microservice",
   "verify_ssl": true
