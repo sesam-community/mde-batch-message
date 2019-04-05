@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, abort
+from flask import Flask, request, Response, abort, jsonify
 import cherrypy
 import json
 import os
@@ -47,7 +47,7 @@ def receiver():
     response = requests.post(config["endpoint_url"], json=message, headers=config.get("headers"))
     if response.ok:
         logger.info(f"Successfully sent {message_size} entities to MDE endpoint")
-        return Response(200)
+        return jsonify(response.json())
 
     logger.error(f"Failed to send batch to MDE/Elhub. Error code {response.status_code}. "
                  f"Received the following error message from endpoint: {response.text}")
