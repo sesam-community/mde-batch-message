@@ -16,7 +16,15 @@ format_string = '[%(asctime)s] %(levelname)s %(message)s'
 log_handler = logging.StreamHandler()
 log_handler.setFormatter(logging.Formatter(format_string))
 logger.addHandler(log_handler)
-logger.setLevel(logging.INFO)
+
+loglevel = os.getenv("loglevel")
+if loglevel:
+    level = logging.getLevelName(loglevel)
+    if isinstance(level, str):
+        level = logging.INFO
+    logger.setLevel(level)
+else:
+    logger.setLevel(logging.INFO)
 
 config = json.loads(os.getenv("config", "{}"))
 if not config or type(config) is not dict:
@@ -43,6 +51,7 @@ def receiver():
 
     logger.info(f"Constructing message with {message_size} entities")
     message = construct_message(entities)
+    logger.debug(f"Message body:\n{json.dumps(message)}")
 
     response = requests.post(config["endpoint_url"], json=message, headers=config.get("headers"))
     if response.ok:
