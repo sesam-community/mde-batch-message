@@ -45,7 +45,7 @@ def receiver():
     message = construct_message(entities)
 
     response = requests.post(config["endpoint_url"], json=message, headers=config.get("headers"))
-    if response.status_code == requests.codes.ok:
+    if response.ok:
         logger.info(f"Successfully sent {message_size} entities to MDE endpoint")
         return Response(200)
 
