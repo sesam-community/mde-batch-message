@@ -67,7 +67,7 @@ def receiver():
 def construct_message(entities):
 
     template = Template(config["template"])
-    uuid1 = uuid.uuid4().hex
+    uuid1 = str(uuid.uuid4())
     now = datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
     string_output = template.render(uuid=uuid1, now=now)
     dict_output = json.loads(string_output)
